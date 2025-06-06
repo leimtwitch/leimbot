@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>LeimTwitch Бот</title>
+    <style>
+        body {
+            background-color: #0e0e0e;
+            color: #ffffff;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        a {
+            color: #00afff;
+            text-decoration: none;
+        }
+        .commands {
+            text-align: left;
+            max-width: 600px;
+            margin: 20px auto;
+        }
+    </style>
+
+<style>
+  .rain {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9999;
+  }
+
+  .raindrop {
+    position: absolute;
+    width: 1px;
+    height: 60px;
+    background: rgba(255, 255, 255, 0.3);
+    animation: fall linear infinite;
+  }
+
+  @keyframes fall {
+    0% {
+      transform: translateY(-100%);
+    }
+    100% {
+      transform: translateY(100vh);
+    }
+  }
+</style>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const rainContainer = document.createElement("div");
+    rainContainer.className = "rain";
+    document.body.appendChild(rainContainer);
+
+    for (let i = 0; i < 100; i++) {
+      const drop = document.createElement("div");
+      drop.className = "raindrop";
+      drop.style.left = Math.random() * 100 + "vw";
+      drop.style.animationDuration = 0.5 + Math.random() * 0.5 + "s";
+      drop.style.animationDelay = Math.random() * 5 + "s";
+      rainContainer.appendChild(drop);
+    }
+  });
+</script>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="fog"></div>
+    <div class="fog fog2"></div>
+
+
+<div id="intro-overlay">
+  
+</div>
+
+
+    <h1 class="blink">LeimTwitch Бот</h1>
+    <div>
+        <img src="images/new_cat_banner.png" alt="Котик" style="max-width: 100%; height: auto;">
+        <p style="margin-top: 10px; font-size: 18px;">
+            © Все права защищены @leimtwitch 
+            <a href="" target="_blank"></a>
+        </p>
+    </div>
+    <div class="commands">
+        <h2>📜 Команды</h2>
+        <ul>
+            <li>!деп</li>
+            <li>!слот</li>
+            <li>!любовь</li>
+            <li>!обнять [ник]</li>
+            <li>!похвалить [ник]</li>
+            <li>!дуэль [ник]</li>
+            <li>!погода [город]</li>
+            <li>!питомец [вид]</li>
+            <li>!кормить</li>
+            <li>!играть</li>
+            <li>!топ</li>
+            <li>!info</li>
+            <li>!ежедневка</li>
+        </ul>
+    </div>
+
+<section style="margin-top: 50px; text-align: center; color: #fff;">
+    <h2><p></p>
+    
+
+</section>
+
+<p><a href="" target="_blank"></a></p>
+<p><a href="https://" target="_blank"></a></p>
+
+<p>
+
+
+<p>Подробности и обновления доступны тут: <a href="https://twitch.tv/leimtwitch" target="_blank">twitch.tv/leimtwitch</a> и <a href="https://t.me/leimtg" target="_blank">https://t.me/leimtg</a></p>
+
+<p>Предложка <a href="https://t.me/leimtwitchbot" target="_blank">https://t.me/leimtwitchbot</a></p>
+</body>
+</html>

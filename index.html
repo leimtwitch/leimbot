@@ -1,124 +1,167 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <title>LeimTwitch Бот</title>
-    <style>
-        body {
-            background-color: #0e0e0e;
-            color: #ffffff;
-            font-family: Arial, sans-serif;
-            text-align: center;
-        }
-        a {
-            color: #00afff;
-            text-decoration: none;
-        }
-        .commands {
-            text-align: left;
-            max-width: 600px;
-            margin: 20px auto;
-        }
-    </style>
-
-<style>
-  .rain {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 9999;
-  }
-
-  .raindrop {
-    position: absolute;
-    width: 1px;
-    height: 60px;
-    background: rgba(255, 255, 255, 0.3);
-    animation: fall linear infinite;
-  }
-
-  @keyframes fall {
-    0% {
-      transform: translateY(-100%);
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LeimTwitch Бот</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #000 url('https://www.transparenttextures.com/patterns/dark-mosaic.png') repeat;
+      color: #00d9ff;
+      background-size: cover;
+      overflow: hidden;
     }
-    100% {
-      transform: translateY(100vh);
+    .container {
+      max-width: 800px;
+      margin: auto;
+      padding: 2rem;
+      position: relative;
+      z-index: 2;
     }
-  }
-</style>
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const rainContainer = document.createElement("div");
-    rainContainer.className = "rain";
-    document.body.appendChild(rainContainer);
-
-    for (let i = 0; i < 100; i++) {
-      const drop = document.createElement("div");
-      drop.className = "raindrop";
-      drop.style.left = Math.random() * 100 + "vw";
-      drop.style.animationDuration = 0.5 + Math.random() * 0.5 + "s";
-      drop.style.animationDelay = Math.random() * 5 + "s";
-      rainContainer.appendChild(drop);
+    .header {
+      text-align: center;
+      margin-bottom: 2rem;
     }
-  });
-</script>
-
-  <link rel="stylesheet" href="style.css">
+    .avatar {
+      width: 100px;
+      height: auto;
+    }
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+    li {
+      background: rgba(0, 0, 0, 0.5);
+      border-left: 4px solid #00d9ff;
+      margin-bottom: 0.5rem;
+      padding: 0.75rem;
+    }
+    .links {
+      margin-top: 2rem;
+      text-align: center;
+    }
+    .links a {
+      color: #00d9ff;
+      text-decoration: none;
+      display: block;
+      margin: 0.5rem 0;
+    }
+    .footer {
+      text-align: center;
+      margin-top: 3rem;
+      padding-top: 1rem;
+      border-top: 1px solid #00d9ff;
+      font-size: 0.9rem;
+      color: #00d9ff;
+    }
+    canvas#rain-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+  </style>
 </head>
 <body>
-    <div class="fog"></div>
-    <div class="fog fog2"></div>
-
-
-<div id="intro-overlay">
-  
-</div>
-
-
-    <h1 class="blink">LeimTwitch Бот</h1>
-    <div>
-        <img src="logo-leim.png" alt="Котик" style="max-width: 300px; height: auto;">
-        <p style="margin-top: 10px; font-size: 18px;">
-            © Все права защищены @leimtwitch 
-            <a href="" target="_blank"></a>
-        </p>
-    </div>
-    <div class="commands">
-        <h2>📜 Команды</h2>
-        <ul>
-            <li>!деп</li>
-            <li>!слот</li>
-            <li>!любовь</li>
-            <li>!обнять [ник]</li>
-            <li>!похвалить [ник]</li>
-            <li>!дуэль [ник]</li>
-            <li>!погода [город]</li>
-            <li>!питомец [вид]</li>
-            <li>!кормить</li>
-            <li>!играть</li>
-            <li>!топ</li>
-            <li>!info</li>
-            <li>!ежедневка</li>
-        </ul>
+  <canvas id="rain-canvas"></canvas>
+  <div class="container">
+    <div class="header">
+      <img src="logo-leim.png.png" alt="LeimTwitch Logo" class="avatar">
+      <h1>LeimTwitch Бот</h1>
+      <p>Подробности и обновления доступны тут:</p>
+      <div class="links">
+        <a href="https://twitch.tv/leimtwitch" target="_blank">twitch.tv/leimtwitch</a>
+        <a href="https://t.me/leimtg" target="_blank">Telegram: @leimtg</a>
+        <a href="https://t.me/leimtwitchbot" target="_blank">Предложка: @leimtwitchbot</a>
+      </div>
     </div>
 
-<section style="margin-top: 50px; text-align: center; color: #fff;">
-    <h2><p></p>
-    
+    <h2>Команды:</h2>
+    <ul>
+      <li>!деп</li>
+      <li>!слот</li>
+      <li>!монетка</li>
+      <li>!любовь</li>
+      <li>!обнять [ник]</li>
+      <li>!похвалить [ник]</li>
+      <li>!дуэль [ник] [ставка]</li>
+      <li>!погода [город]</li>
+      <li>!питомец [вид]</li>
+      <li>!кормить</li>
+      <li>!играть</li>
+      <li>!топ</li>
+      <li>!info</li>
+      <li>!ежедневка</li>
+      <li>!дружба [ник]</li>
+      <li>!друзья</li>
+      <li>!дружить [ник]</li>
+      <li>!подарить [ник] [сумма]</li>
+    </ul>
 
-</section>
+    <div class="footer">
+      &copy; Все права защищены @leimtwitch
+    </div>
+  </div>
+  <script>
+    const canvas = document.getElementById('rain-canvas');
+    const ctx = canvas.getContext('2d');
+    let width, height;
 
-<p><a href="" target="_blank"></a></p>
-<p><a href="https://" target="_blank"></a></p>
+    function resize() {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resize);
+    resize();
 
-<p>
+    const drops = Array.from({ length: 300 }, () => ({
+      x: Math.random() * width,
+      y: Math.random() * height,
+      l: 2 + Math.random() * 8,
+      xs: -2 + Math.random() * 4,
+      ys: 4 + Math.random() * 4
+    }));
 
+    function draw() {
+      ctx.clearRect(0, 0, width, height);
+      ctx.strokeStyle = 'rgba(0, 217, 255, 0.5)';
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      for (let i = 0; i < drops.length; i++) {
+        const d = drops[i];
+        ctx.moveTo(d.x, d.y);
+        ctx.lineTo(d.x + d.xs, d.y + d.l);
+      }
+      ctx.stroke();
+      move();
+    }
 
-<p>Подробности и обновления доступны тут: <a href="https://twitch.tv/leimtwitch" target="_blank">twitch.tv/leimtwitch</a> и <a href="https://t.me/leimtg" target="_blank">https://t.me/leimtg</a></p>
+    function move() {
+      for (let i = 0; i < drops.length; i++) {
+        const d = drops[i];
+        d.x += d.xs;
+        d.y += d.ys;
+        if (d.y > height) {
+          d.x = Math.random() * width;
+          d.y = -20;
+        }
+      }
+    }
 
-<p>Предложка <a href="https://t.me/leimtwitchbot" target="_blank">https://t.me/leimtwitchbot</a></p>
+    function loop() {
+      draw();
+      requestAnimationFrame(loop);
+    }
+    loop();
+  </script>
 </body>
 </html>

@@ -1,0 +1,267 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LeimTwitch Бот</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #2c3e50, #34495e);
+      color: #fff;
+      background-size: cover;
+      background-attachment: fixed;
+      line-height: 1.6;
+    }
+
+    /* Preloader styles */
+    #preloader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+
+    #preloader.hidden {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .preloader-text {
+      font-size: 4rem;
+      font-weight: bold;
+      color: #e67e22;
+      animation: fadeZoom 2s ease-in-out infinite;
+    }
+
+    @keyframes fadeZoom {
+      0%, 100% {
+        opacity: 0.8;
+        transform: scale(1);
+      }
+      50% {
+        opacity: 1;
+        transform: scale(1.1);
+      }
+    }
+
+    .container {
+      display: none;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2rem;
+      box-sizing: border-box;
+      animation: fadeIn 1s ease-out;
+    }
+
+    @keyframes fadeIn {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 2rem;
+      position: relative;
+      transition: transform 0.3s ease;
+    }
+
+    .header:hover {
+      transform: scale(1.05);
+    }
+
+    .header img {
+      width: 120px;
+      height: auto;
+      border-radius: 50%;
+      margin-bottom: 1rem;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.6);
+      transition: transform 0.3s ease;
+    }
+
+    .header img:hover {
+      transform: rotate(360deg);
+    }
+
+    h1 {
+      font-size: 3.5rem;
+      font-weight: 700;
+      color: #e67e22;
+      margin-bottom: 1rem;
+      text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
+    }
+
+    p {
+      font-size: 1.2rem;
+      margin-bottom: 1.5rem;
+      color: #ecf0f1;
+    }
+
+    .links {
+      margin-top: 2rem;
+      text-align: center;
+    }
+
+    .links a {
+      color: #e67e22;
+      text-decoration: none;
+      display: inline-block;
+      margin: 0.5rem 0;
+      font-size: 1.1rem;
+      transition: color 0.3s ease, transform 0.3s ease;
+    }
+
+    .links a:hover {
+      color: #f39c12;
+      transform: scale(1.1);
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 3rem;
+      padding-top: 1rem;
+      border-top: 1px solid #e67e22;
+      font-size: 1rem;
+      color: #e67e22;
+    }
+
+    .commands {
+      font-size: 1.2rem;
+      color: #ecf0f1;
+      list-style: none;
+      padding: 0;
+      margin: 2rem 0;
+    }
+
+    .commands li {
+      margin: 10px 0;
+      padding: 10px;
+      background: rgba(0, 0, 0, 0.7);
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+      display: flex;
+      align-items: center;
+      transition: background 0.3s ease, transform 0.3s ease;
+    }
+
+    .commands li:hover {
+      background: rgba(0, 0, 0, 0.85);
+      transform: scale(1.05);
+    }
+
+    .commands li .icon {
+      font-size: 2rem;
+      margin-right: 10px;
+      color: #e67e22;
+    }
+
+    @media screen and (max-width: 600px) {
+      h1 {
+        font-size: 2.4rem;
+      }
+      .container {
+        padding: 1.5rem;
+      }
+      .links a {
+        font-size: 1rem;
+      }
+    }
+
+    @keyframes neonFadeIn {
+      0% {
+        opacity: 0;
+        transform: scale(0.8);
+        text-shadow: none;
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1);
+        text-shadow:
+          0 0 5px #e67e22,
+          0 0 10px #e67e22,
+          0 0 20px #e67e22,
+          0 0 40px #e67e22;
+      }
+    }
+
+    .intro-title {
+      font-size: 4rem;
+      font-weight: bold;
+      text-align: center;
+      margin-top: 15vh;
+      opacity: 0;
+      color: #e67e22;
+      animation: neonFadeIn 2s ease-out forwards;
+    }
+
+  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <div id="preloader">
+    <div class="preloader-text">Загрузка...</div>
+  </div>
+
+  <div class="container">
+    <div class="header">
+      <img src="logo-leim.png.png" alt="LeimTwitch Logo" class="avatar">
+      <h1>LeimTwitch Бот</h1>
+      <p>Подробности и обновления доступны тут:</p>
+      <div class="links">
+        <a href="https://twitch.tv/leimtwitch" target="_blank">twitch.tv/leimtwitch</a>
+        <a href="https://t.me/leimtg" target="_blank">Telegram: @leimtg</a>
+        <a href="https://t.me/leimtwitchbot" target="_blank">Предложка: @leimtwitchbot</a>
+      </div>
+    </div>
+
+    <h2>Команды:</h2>
+    <ul class="commands">
+      <li><span class="icon">🎲</span><span>!деп</span></li>
+      <li><span class="icon">🎰</span><span>!слот</span></li>
+      <li><span class="icon">🪙</span><span>!монетка</span></li>
+      <li><span class="icon">🎮</span><span>!рулетка [ставка]</span></li>
+      <li><span class="icon">💘</span><span>!любовь</span></li>
+      <li><span class="icon">🤗</span><span>!обнять [ник]</span></li>
+      <li><span class="icon">👏</span><span>!похвалить [ник]</span></li>
+      <li><span class="icon">⚔️</span><span>!дуэль [ник] [ставка]</span></li>
+      <li><span class="icon">🌦️</span><span>!погода [город]</span></li>
+      <li><span class="icon">🐾</span><span>!питомец [вид]</span></li>
+      <li><span class="icon">🍖</span><span>!кормить</span></li>
+      <li><span class="icon">🎮</span><span>!играть</span></li>
+      <li><span class="icon">🏆</span><span>!топ</span></li>
+      <li><span class="icon">ℹ️</span><span>!info</span></li>
+      <li><span class="icon">📅</span><span>!ежедневка</span></li>
+      <li><span class="icon">💼</span><span>!работа</span></li>
+      <li><span class="icon">🍵</span><span>!чай</span></li>
+      <li><span class="icon">📊</span><span>!статы</span></li>
+      <li><span class="icon">🤝</span><span>!дружба [ник]</span></li>
+      <li><span class="icon">👥</span><span>!друзья</span></li>
+      <li><span class="icon">🤗</span><span>!дружить [ник]</span></li>
+      <li><span class="icon">🎁</span><span>!подарить [ник] [сумма]</span></li>
+    </ul>
+
+    <div class="footer">
+      &copy; Все права защищены @leimtwitch
+    </div>
+  </div>
+
+  <script>
+    window.addEventListener('load', () => {
+      const preloader = document.getElementById('preloader');
+      setTimeout(() => {
+        preloader.classList.add('hidden');
+        document.querySelector('.container').style.display = 'block';
+      }, 5000); // задержка 5 секунд
+    });
+  </script>
+</body>
+</html>
